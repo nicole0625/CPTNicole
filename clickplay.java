@@ -39,17 +39,29 @@ public class clickplay{
 		//putting each word into the array
 		for(intcount = 0; intcount<=intthemenum; intcount++){
 			strword[intcount][0] = theme2.readLine();
-			strword[intcount][1] = Double.toString(Math.random());
+			strword[intcount][1] = Integer.toString((int)(Math.random()*10000));
 			con.println(intcount+" "+strword[intcount][0]+" random: "+strword[intcount][1]);
 		}
+		con.println("Testing");
 		//bubble sort
-		double dblsortnum;
+		Console con2 = new Console("array",700, 1000);
+		String strtempword;
+		int intcount2;
+		//for(intcount2 = 0; intcount2<intthemenum-1; intcount2++){
 			for(intcount = 0; intcount<intthemenum-1; intcount++){
+				con2.println("Testing in for loop");
 				if(Integer.parseInt(strword[intcount][1])>Integer.parseInt(strword[intcount+1][1])){
-					dblsortnum = strword[intcount][1];
-					strword[intcount][1] = strword[intcount+1][1];
-					strword[intcount+1][1] = dblsortnum;
+					con2.println("Testing in if statement");
+					strtempword = strword[intcount][0];
+					con2.println("   Going up: "+strtempword+strword[intcount][1]);
+					strword[intcount][0] = strword[intcount+1][0];
+					con2.println("   New down: "+strword[intcount][0]+strword[intcount+1][1]);
+					strword[intcount+1][0] = strtempword;
+				}else{
+					con2.println("No swap... bigger: "+strword[intcount+1][0]+strword[intcount+1][1]+" smaller: "+strword[intcount][0]+strword[intcount][1]);
 				}
 			}
+
+
 	}
 }
