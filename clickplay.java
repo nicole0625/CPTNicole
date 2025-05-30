@@ -1,8 +1,13 @@
 import arc.*;
+import java.awt.Color;
+import java.lang.Object;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class clickplay{
 	public static void main(String[] args){
 		Console con = new Console("PLAY START");
+		con.setBackgroundColor(new Color(40,36,92));
 		String strname;
 		String strSelectedTheme;
 		con.println("Please enter your name:");
@@ -40,28 +45,53 @@ public class clickplay{
 		for(intcount = 0; intcount<=intthemenum; intcount++){
 			strword[intcount][0] = theme2.readLine();
 			strword[intcount][1] = Integer.toString((int)(Math.random()*10000));
-			con.println(intcount+" "+strword[intcount][0]+" random: "+strword[intcount][1]);
+			System.out.println(intcount+" "+strword[intcount][0]+" random: "+strword[intcount][1]);
 		}
-		con.println("Testing");
 		//bubble sort
-		Console con2 = new Console("array",700, 1000);
 		String strtempword;
+		String strtempnum;
 		int intcount2;
-		//for(intcount2 = 0; intcount2<intthemenum-1; intcount2++){
-			for(intcount = 0; intcount<intthemenum-1; intcount++){
-				con2.println("Testing in for loop");
+		for(intcount2 = 0; intcount2<intthemenum-1; intcount2++){
+			for(intcount = 0; intcount<=intthemenum-1; intcount++){
+				System.out.println("Testing in for loop");
 				if(Integer.parseInt(strword[intcount][1])>Integer.parseInt(strword[intcount+1][1])){
-					con2.println("Testing in if statement");
+					strtempnum = strword[intcount][1];
+					strword[intcount][1] = strword[intcount+1][1];
+					strword[intcount+1][1] = strtempnum;
+					
+					System.out.println("Testing in if statement");
 					strtempword = strword[intcount][0];
-					con2.println("   Going up: "+strtempword+strword[intcount][1]);
+					System.out.println("   Going up: "+strtempword+strword[intcount][1]);
 					strword[intcount][0] = strword[intcount+1][0];
-					con2.println("   New down: "+strword[intcount][0]+strword[intcount+1][1]);
+					System.out.println("   New down: "+strword[intcount][0]+strword[intcount+1][1]);
 					strword[intcount+1][0] = strtempword;
+					
+					
 				}else{
-					con2.println("No swap... bigger: "+strword[intcount+1][0]+strword[intcount+1][1]+" smaller: "+strword[intcount][0]+strword[intcount][1]);
+					
 				}
 			}
-
+		}
+		
+		for(intcount = 0; intcount<=intthemenum; intcount++){
+			System.out.println(strword[intcount][0]+" "+strword[intcount][1]);
+		}
+		
+		
+	//GAME PLAY
+		con.println("");
+		int intnumofletters;
+		System.out.println("SECRET WORD: "+strword[0][0]);
+		intnumofletters = strword[0][0].length();
+		//
+		for(intcount = 0; intcount< intnumofletters; intcount++){
+			con.print("_ ");
+		}
+		con.setDrawColor(new Color(255,194,240));
+		con.fillOval(700,150,100,100);
+		
+		
 
 	}
+
 }
