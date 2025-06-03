@@ -81,14 +81,68 @@ public class clickplay{
 	//GAME PLAY
 		con.println("");
 		int intnumofletters;
+		String strguess;
+		int intwrongs;
+		int intrannum;
+		String strranlet;
 		System.out.println("SECRET WORD: "+strword[0][0]);
 		intnumofletters = strword[0][0].length();
-		//
+		intwrongs = 0;
+		String strletters[][];
+		//strletters = new String[intnumofletters][1];
+		//drawing hanging pole
+		con.setDrawColor(new Color(255,194,240));
+		con.drawLine(680, 140, 790, 140);
+		con.drawLine(790, 140, 790, 155);
+		con.drawLine(680, 140, 680, 400);
+		con.drawLine(650, 400, 830, 400);
+	
 		for(intcount = 0; intcount< intnumofletters; intcount++){
 			con.print("_ ");
 		}
-		con.setDrawColor(new Color(255,194,240));
-		con.fillOval(700,150,100,100);
+		
+		/*for(intcount = 0; intcount< intnumofletters; intcount++){
+			strletters[intcount][1] = strword[0][0].substring(intcount, intcount+1);
+			System.out.println("Letters in word: "+strletters);
+	
+		}*/
+			
+		con.println("");
+		con.print("Type in your guess: ");
+		strguess = con.readLine();
+		while(!strguess.equalsIgnoreCase(strword[0][0]) && intwrongs <5){
+			//con.clear();
+			intwrongs = intwrongs+1;
+			if(intwrongs == 1){
+				con.fillOval(765, 157, 50, 50); //head
+			}else if(intwrongs == 2){
+				con.fillRect(788, 207, 4, 85); //torso
+			}else if(intwrongs == 3){
+				con.drawLine(788, 213, 765, 260); //arm left
+			}else if(intwrongs == 4){
+				con.drawLine(792, 213, 815, 260); //arm right
+			}else if(intwrongs == 5){
+				con.drawLine(788, 292, 772, 350); // leg left
+			}
+			intrannum = (int)(Math.random()*intnumofletters)-1;
+			strranlet = strword[0][0].substring(intrannum, intrannum+1);
+			con.println("Random letter: "+strranlet);
+			con.println("Wrong! Guess again");
+			strguess = con.readLine();
+			intrannum = (int)(Math.random()*intnumofletters)-1;
+		}
+		if(intwrongs ==5){
+			con.drawLine(792, 292, 808, 350); // leg right
+			con.clear();
+			con.println("GAME OVER");
+		}
+		
+		
+		if(strguess.equalsIgnoreCase(strword[0][0])){
+			con.clear();
+			con.println("Congrats! You got the secret word, "+strword[0][0]);
+		}
+	
 		
 		
 
