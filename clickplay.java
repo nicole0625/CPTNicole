@@ -8,80 +8,91 @@ import java.awt.Font;
 public class clickplay{
 	public static void main(String[] args){
 		Console con = new Console("PLAY START");
-		con.setBackgroundColor(new Color(209,113,142));
-		Font fntTest = con.loadFont("TimesRoman.ttf", 40);
+		con.setBackgroundColor(new Color(237,164,178));
 		
+		int intscore;
 		String strname;
 		String strSelectedTheme;
 		con.println("Please enter your name:");
 		strname = con.readLine();
 		strSelectedTheme = "";
-		con.println("Hi, "+strname+"! Type in the theme you wish to play:");
 		if(!strSelectedTheme.equalsIgnoreCase("foods") || !strSelectedTheme.equalsIgnoreCase("musicals") || !strSelectedTheme.equalsIgnoreCase("books") || !strSelectedTheme.equalsIgnoreCase("flowers") || !strSelectedTheme.equalsIgnoreCase("CRK")){
+			con.clear();
+			con.println("Hi, "+strname+"! Type in the theme you wish to play:");
 			con.println("Foods   ||   Musicals   ||   Books   ||   Flowers   ||   CRK");
 			strSelectedTheme = con.readLine();
-		}else{
-			strSelectedTheme = con.readLine();
 		}
-		
-		//creating array for selected theme
-		String strword[][];
-		String strread;
-		int intthemenum;
-		intthemenum = -1;
-		int intcount;
-		intcount = -1;
-		
-		TextInputFile theme = new TextInputFile(strSelectedTheme+".txt");
-		while(theme.eof()==false){
-			//getting the number of words of the selected theme
-			strread = theme.readLine();
-			intthemenum = intthemenum+1;
-		}
-		theme.close();
-		TextInputFile theme2 = new TextInputFile(strSelectedTheme+".txt");
-		
-		//setting the number of arrays for strword to be the number of words in the themes file
-		strword = new String[intthemenum+1][2];
-		
-		//putting each word into the array
-		for(intcount = 0; intcount<=intthemenum; intcount++){
-			strword[intcount][0] = theme2.readLine();
-			strword[intcount][1] = Integer.toString((int)(Math.random()*10000));
-			System.out.println(intcount+" "+strword[intcount][0]+" random: "+strword[intcount][1]);
-		}
-		//bubble sort
-		String strtempword;
-		String strtempnum;
-		int intcount2;
-		for(intcount2 = 0; intcount2<intthemenum-1; intcount2++){
-			for(intcount = 0; intcount<=intthemenum-1; intcount++){
-				System.out.println("Testing in for loop");
-				if(Integer.parseInt(strword[intcount][1])>Integer.parseInt(strword[intcount+1][1])){
-					strtempnum = strword[intcount][1];
-					strword[intcount][1] = strword[intcount+1][1];
-					strword[intcount+1][1] = strtempnum;
-					
-					System.out.println("Testing in if statement");
-					strtempword = strword[intcount][0];
-					System.out.println("   Going up: "+strtempword+strword[intcount][1]);
-					strword[intcount][0] = strword[intcount+1][0];
-					System.out.println("   New down: "+strword[intcount][0]+strword[intcount+1][1]);
-					strword[intcount+1][0] = strtempword;
-					
-					
-				}else{
-					
+		boolean blnplay;
+		intscore= 0;
+		String strplay = "yes";
+		while(strplay.equalsIgnoreCase("yes")){
+			//creating array for selected theme
+			String strword[][];
+			String strread;
+			int intthemenum;
+			intthemenum = -1;
+			int intcount;
+			intcount = -1;
+			
+			TextInputFile theme = new TextInputFile(strSelectedTheme+".txt");
+			while(theme.eof()==false){
+				//getting the number of words of the selected theme
+				strread = theme.readLine();
+				intthemenum = intthemenum+1;
+			}
+			theme.close();
+			TextInputFile theme2 = new TextInputFile(strSelectedTheme+".txt");
+			
+			//setting the number of arrays for strword to be the number of words in the themes file
+			strword = new String[intthemenum+1][2];
+			
+			//putting each word into the array
+			for(intcount = 0; intcount<=intthemenum; intcount++){
+				strword[intcount][0] = theme2.readLine();
+				strword[intcount][1] = Integer.toString((int)(Math.random()*10000));
+				System.out.println(intcount+" "+strword[intcount][0]+" random: "+strword[intcount][1]);
+			}
+			//bubble sort
+			String strtempword;
+			String strtempnum;
+			int intcount2;
+			for(intcount2 = 0; intcount2<intthemenum-1; intcount2++){
+				for(intcount = 0; intcount<=intthemenum-1; intcount++){
+					System.out.println("Testing in for loop");
+					if(Integer.parseInt(strword[intcount][1])>Integer.parseInt(strword[intcount+1][1])){
+						strtempnum = strword[intcount][1];
+						strword[intcount][1] = strword[intcount+1][1];
+						strword[intcount+1][1] = strtempnum;
+						
+						System.out.println("Testing in if statement");
+						strtempword = strword[intcount][0];
+						System.out.println("   Going up: "+strtempword+strword[intcount][1]);
+						strword[intcount][0] = strword[intcount+1][0];
+						System.out.println("   New down: "+strword[intcount][0]+strword[intcount+1][1]);
+						strword[intcount+1][0] = strtempword;
+						
+						
+					}else{
+						
+					}
 				}
 			}
+			
+			for(intcount = 0; intcount<=intthemenum; intcount++){
+				System.out.println(strword[intcount][0]+" "+strword[intcount][1]);
+			}
+			
+				intscore = intscore + gameplay.gameplay(con, strword);
+				con.println("Play again? (Please type in yes or no)");
+				strplay = con.readLine();
 		}
 		
-		for(intcount = 0; intcount<=intthemenum; intcount++){
-			System.out.println(strword[intcount][0]+" "+strword[intcount][1]);
+		if(strplay.equalsIgnoreCase("no")){
+			con.println(intscore);
+			con.println("Thank you for playing!");
 		}
 		
-		
-	//GAME PLAY
+	/*GAME PLAY
 		con.println("");
 		int intnumofletters;
 		String strguess;
@@ -95,7 +106,7 @@ public class clickplay{
 		strletters = new String[intnumofletters][2];
 		strhidden =new String[intnumofletters][1];
 		//drawing hanging pole
-		con.setDrawColor(new Color(255,194,240));
+		con.setDrawColor(new Color(142, 106, 173));
 		con.drawLine(680, 140, 790, 140);
 		con.drawLine(790, 140, 790, 155);
 		con.drawLine(680, 140, 680, 400);
@@ -149,6 +160,7 @@ public class clickplay{
 		}
 		if(intwrongs ==5){
 			con.drawLine(792, 292, 808, 350); // leg right
+			con.sleep(500);
 			con.clear();
 			con.setBackgroundColor(new Color(133,21,21));
 			con.println("GAME OVER");
@@ -156,14 +168,11 @@ public class clickplay{
 		
 		
 		if(strguess.equalsIgnoreCase(strword[0][0])){
+			con.sleep(500);
 			con.clear();
 			con.setBackgroundColor(new Color(89,161,39));
 			con.println("Congrats! You got the secret word, "+strword[0][0]);
-		}
-	
-		
-		
-
+		}*/
 	}
 
 }
