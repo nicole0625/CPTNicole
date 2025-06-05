@@ -7,7 +7,7 @@ import java.awt.Font;
 
 public class gameplay{
 	public static int gameplay(Console con, String strword[][]){
-
+		
 		con.println("");
 		int intcount;
 		int score;
@@ -45,8 +45,8 @@ public class gameplay{
 		}
 		con.println("");
 		con.println("Type in your guess: ");
-		
 		strguess = con.readLine();
+		
 		while(!strguess.equalsIgnoreCase(strword[0][0]) && intwrongs <5){
 			//con.clear();
 			intwrongs = intwrongs+1;
@@ -65,8 +65,11 @@ public class gameplay{
 			con.clear();
 			//selecting random letter in word to reveal letter
 			intrannum = ((int)(Math.random()*intnumofletters));
-			System.out.println("Random numer: "+intrannum);
-			strhidden[intrannum][0] = strword[0][0].substring(intrannum,intrannum+1);
+			while(strhidden[intrannum][0].equals("_")){
+				intrannum = ((int)(Math.random()*intnumofletters));
+				System.out.println("Random number: "+intrannum);
+				strhidden[intrannum][0] = strword[0][0].substring(intrannum,intrannum+1);
+			}
 			//printing new line with another letter revealed
 			for(intcount = 0;intcount<intnumofletters; intcount++){
 				con.print(strhidden[intcount][0]);
@@ -83,6 +86,8 @@ public class gameplay{
 			con.clear();
 			//con.setBackgroundColor(new Color(133,21,21));
 			con.println("GAME OVER");
+			con.setDrawColor(new Color(237,164,178));
+			con.fillRect(690,145,300,220);
 			score = 0;
 			System.out.println("SCORE: "+score);
 			return score;
@@ -94,8 +99,11 @@ public class gameplay{
 			con.clear();
 			//con.setBackgroundColor(new Color(89,161,39));
 			con.println("Congrats! You got the secret word, "+strword[0][0]);
+			intwrongs = 0;
 			score = 1;
 			System.out.println("SCORE: "+score);
+			con.setDrawColor(new Color(237,164,178));
+			con.fillRect(690,157,300,220);
 			return score;
 		}
 		return score;
