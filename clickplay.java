@@ -6,20 +6,18 @@ import java.awt.image.BufferedImage;
 import java.awt.Font;
 
 public class clickplay{
-	public static void main(String[] args){
-		Console con = new Console("PLAY START");
+	public static Console clickplay(Console con, String strname){
 		con.setBackgroundColor(new Color(237,164,178));
-		//Paintingwithchocolate-K5mo.ttf
+		
 		int intscore;
-		String strname;
 		String strSelectedTheme;
+		boolean plyagain;
+		
 		con.setTextColor(new Color(96,64,130));
-		con.println("Please enter your name:");
-		strname = con.readLine();
 		strSelectedTheme = "";
 		if(!strSelectedTheme.equalsIgnoreCase("foods") || !strSelectedTheme.equalsIgnoreCase("musicals") || !strSelectedTheme.equalsIgnoreCase("books") || !strSelectedTheme.equalsIgnoreCase("flowers") || !strSelectedTheme.equalsIgnoreCase("CRK")){
 			con.clear();
-			con.println("Hi, "+strname+"! Type in the theme you wish to play:");
+			con.println("Type in the theme you wish to play:");
 			con.println("Foods   ||   Musicals   ||   Books   ||   Flowers   ||   CRK");
 			strSelectedTheme = con.readLine();
 		}
@@ -88,12 +86,32 @@ public class clickplay{
 		}
 		
 		if(strplay.equalsIgnoreCase("no")){
-			con.println(intscore);
 			TextOutputFile leaderboard = new TextOutputFile("leaderboard.txt",true);
 			leaderboard.println(strname+" | Score: "+intscore);
-			con.println("Thank you for playing!");
+			con.println("Thank you for playing!"); 
 		}
+		con.sleep(2000);
+		return con;
 		
+	}
+	public static Console leaderboard(Console con){
+		
+		String player;
+		String strreturn = "0";
+		TextInputFile board = new TextInputFile("leaderboard.txt");
+		while(board.eof()==false){
+			player = board.readLine();
+			con.println(player);	
+		}
+		while(!strreturn.equals("1")){
+			con.println("Return to main screen? (Enter 1)");
+			strreturn = con.readLine();
+		}
+		if(strreturn.equals("1")){
+			return con;
+		}
+		return con;
+	
 	}
 
 }

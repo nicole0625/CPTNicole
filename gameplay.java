@@ -25,10 +25,10 @@ public class gameplay{
 		strhidden =new String[intnumofletters][1];
 		//drawing hanging pole
 		con.setDrawColor(new Color(142, 106, 173));
-		con.drawLine(680, 140, 790, 140);
-		con.drawLine(790, 140, 790, 155);
-		con.drawLine(680, 140, 680, 400);
-		con.drawLine(650, 400, 830, 400);
+		con.drawLine(680, 140, 790, 140); //top pole
+		con.drawLine(790, 140, 790, 155); //hanger
+		con.drawLine(680, 140, 680, 400); //long pole
+		con.drawLine(650, 400, 830, 400); //base
 	
 			
 		con.clear();
@@ -65,11 +65,11 @@ public class gameplay{
 			con.clear();
 			//selecting random letter in word to reveal letter
 			intrannum = ((int)(Math.random()*intnumofletters));
-			while(strhidden[intrannum][0].equals("_")){
+			while(!strhidden[intrannum][0].equals("_")){
 				intrannum = ((int)(Math.random()*intnumofletters));
-				System.out.println("Random number: "+intrannum);
-				strhidden[intrannum][0] = strword[0][0].substring(intrannum,intrannum+1);
 			}
+			System.out.println("Random number: "+intrannum);
+			strhidden[intrannum][0] = strword[0][0].substring(intrannum,intrannum+1);
 			//printing new line with another letter revealed
 			for(intcount = 0;intcount<intnumofletters; intcount++){
 				con.print(strhidden[intcount][0]);
@@ -84,7 +84,6 @@ public class gameplay{
 			con.drawLine(792, 292, 808, 350); // leg right
 			con.sleep(500);
 			con.clear();
-			//con.setBackgroundColor(new Color(133,21,21));
 			con.println("GAME OVER");
 			con.setDrawColor(new Color(237,164,178));
 			con.fillRect(690,145,300,220);
@@ -97,7 +96,6 @@ public class gameplay{
 		if(strguess.equalsIgnoreCase(strword[0][0])){
 			con.sleep(500);
 			con.clear();
-			//con.setBackgroundColor(new Color(89,161,39));
 			con.println("Congrats! You got the secret word, "+strword[0][0]);
 			intwrongs = 0;
 			score = 1;
