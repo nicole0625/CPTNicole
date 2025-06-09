@@ -15,12 +15,56 @@ public class clickplay{
 		
 		con.setTextColor(new Color(96,64,130));
 		strSelectedTheme = "";
-		if(!strSelectedTheme.equalsIgnoreCase("foods") || !strSelectedTheme.equalsIgnoreCase("musicals") || !strSelectedTheme.equalsIgnoreCase("books") || !strSelectedTheme.equalsIgnoreCase("flowers") || !strSelectedTheme.equalsIgnoreCase("CRK")){
+		/*if(!strSelectedTheme.equalsIgnoreCase("foods") || !strSelectedTheme.equalsIgnoreCase("musicals") || !strSelectedTheme.equalsIgnoreCase("books") || !strSelectedTheme.equalsIgnoreCase("flowers") || !strSelectedTheme.equalsIgnoreCase("CRK")){
 			con.clear();
 			con.println("Type in the theme you wish to play:");
 			con.println("Foods   ||   Musicals   ||   Books   ||   Flowers   ||   CRK");
 			strSelectedTheme = con.readLine();
+		}*/
+		
+		con.println("Choose a theme!");
+		boolean blntrack = true;
+		int mousex;
+		int mousey;
+		int intpress;
+		con.setDrawColor(new Color(245, 233, 247));
+		//buttons
+		con.fillRoundRect(20,80,176,200,15,15);
+		con.fillRoundRect(206,80,176,200,15,15);
+		con.fillRoundRect(392,80,176,200,15,15);
+		con.fillRoundRect(578,80,176,200,15,15);
+		con.fillRoundRect(764,80,176,200,15,15);
+		con.setDrawColor(new Color(131, 96, 166));
+		//icons
+		BufferedImage foodicon = con.loadImage("iconfood.png");
+		con.drawImage(foodicon, 30,90);
+		con.drawString("Foods",75,245);
+		
+		BufferedImage musicalicon = con.loadImage("iconmusical.png");
+		con.drawImage(musicalicon, 216,90);
+		con.drawString("Musicals",245,245);
+		
+		BufferedImage bookicon = con.loadImage("iconbook.png");
+		con.drawImage(bookicon, 402,90);
+		con.drawString("Books",448,245);
+		
+		BufferedImage flowericon = con.loadImage("iconflower.png");
+		con.drawImage(flowericon, 588,90);
+		con.drawString("Flowers",625,245);
+		
+		BufferedImage crkicon = con.loadImage("iconcrk.png");
+		con.drawImage(crkicon, 774,90);
+		con.drawString("CRK",830,245);
+		
+		con.repaint();
+		while(blntrack = true){
+			intpress = con.currentMouseButton();
+			mousex = con.currentMouseX();
+			mousey = con.currentMouseY();
+			/*if(
+			}*/
 		}
+		
 		intscore= 0;
 		String strplay = "yes";
 		while(strplay.equalsIgnoreCase("yes")){
@@ -111,7 +155,7 @@ public class clickplay{
 			return con;
 		}
 		return con;
-	
 	}
+	
 
 }

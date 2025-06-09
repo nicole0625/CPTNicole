@@ -13,19 +13,36 @@ public class startingscreen{
 		String strname;
 		int intoption;
 		boolean blnrepeat;
-		int x;
-		
+		int x=0;
+		int y=0;
+		int z=0;
+		boolean blntrack = true;
+		int mousex;
+		int mousey;
+		int press;
+				
 		con.setDrawColor(Color.BLACK);
-		con.fillRect(0,0,1000,800);
-		x=0;
-		while(x < 100){
-			x = x+20;
-			System.out.println(x);
-			con.setDrawColor(new Color(x, x, x));
-			con.fillRect(x,0,200,200);
-			con.repaint();
-			con.sleep(500);
+		con.fillRect(0,0,960,540);
+		BufferedImage logo = con.loadImage("logo.png");
+		con.drawImage(logo, 170,60);
+		con.repaint();
+		while(x<240){
+			press = con.currentMouseButton();
+			mousex = con.currentMouseX();
+			mousey = con.currentMouseY();
+			if(press==1){
+				while(x < 240){
+				x = x+12;
+				y = y +8;
+				z = z+9;
+				con.setDrawColor(new Color(x, y, z));
+				con.fillRect(0,0,1000,800);
+				con.repaint();
+				con.sleep(50);
+			}
+			}
 		}
+
 		
 		con.setTextColor(new Color(96,64,130));
 		con.println("Please enter your name:");
