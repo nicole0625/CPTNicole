@@ -11,7 +11,7 @@ public class startingscreen{
 		con.setBackgroundColor(new Color(237,164,178));
 		
 		String strname;
-		int intoption;
+		int intoption=0;
 		boolean blnrepeat;
 		int x=0;
 		int y=0;
@@ -49,10 +49,22 @@ public class startingscreen{
 		strname = con.readLine();
 		while(blnrepeat = true){
 			con.clear();
+			press = con.currentMouseButton();
+			mousex = con.currentMouseX();
+			mousey = con.currentMouseY();
 			con.setDrawColor(new Color(237,164,178));
 			con.fillRect(640,130, 900,430);
-			con.println("Hi, "+strname+"! Welcome to Hangman. PLAY(1), leaderboard(2)");
-			intoption = con.readInt();
+			con.println("Hi, "+strname+"! Welcome to Hangman");
+			int intpress;
+			con.setDrawColor(new Color(245, 233, 247));
+			con.fillRoundRect(30,40,440,100,20,20);
+			con.fillRoundRect(490,40,440,100,20,20);
+			if(press==1 && mousex>30 && mousex<470 && mousey>40 &&mousey<140){
+				intoption = 1;
+			}else if(press==1 && mousex>490 && mousex<930 && mousey>40 &&mousey<140){
+				intoption = 2;
+			}
+
 			if(intoption == 1){
 				clickplay.clickplay(con, strname);
 			}else if(intoption == 2){

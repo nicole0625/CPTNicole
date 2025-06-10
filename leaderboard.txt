@@ -1,7 +1,9 @@
-nicole | Score: 2
-nicole | Score: 4
-Nicole | Score: 1
-nicole | Score: 1
-nicole | Score: 1
-nicole | Score: 1
-nicole | Score: 5
+Player A
+1
+Player B
+3
+Player C
+5
+Player D
+2Nicole
+1

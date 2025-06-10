@@ -10,7 +10,7 @@ public class clickplay{
 		con.setBackgroundColor(new Color(237,164,178));
 		
 		int intscore;
-		String strSelectedTheme;
+		String strSelectedTheme="";
 		boolean plyagain;
 		
 		con.setTextColor(new Color(96,64,130));
@@ -23,7 +23,6 @@ public class clickplay{
 		}*/
 		
 		con.println("Choose a theme!");
-		boolean blntrack = true;
 		int mousex;
 		int mousey;
 		int intpress;
@@ -57,12 +56,21 @@ public class clickplay{
 		con.drawString("CRK",830,245);
 		
 		con.repaint();
-		while(blntrack = true){
+		while(strSelectedTheme.equals("")){
 			intpress = con.currentMouseButton();
 			mousex = con.currentMouseX();
 			mousey = con.currentMouseY();
-			/*if(
-			}*/
+			if(intpress==1 &&  mousey>90 && mousey<249 && mousex>30 && mousex<189){
+				strSelectedTheme = "foods";
+			}else if(intpress==1 &&  mousey>90 && mousey<249 && mousex>216 && mousex<375){
+				strSelectedTheme = "musicals";
+			}else if(intpress==1 &&  mousey>90 && mousey<249 && mousex>402 && mousex<561){
+				strSelectedTheme = "books";
+			}else if(intpress==1 &&  mousey>90 && mousey<249 && mousex>588 && mousex<747){
+				strSelectedTheme = "flowers";
+			}else if(intpress==1 &&  mousey>90 && mousey<249 && mousex>774 && mousex<933){
+				strSelectedTheme = "CRK";
+			}
 		}
 		
 		intscore= 0;
@@ -124,14 +132,15 @@ public class clickplay{
 				System.out.println(strword[intcount][0]+" "+strword[intcount][1]);
 			}
 			
-				intscore = intscore + gameplay.gameplay(con, strword);
-				con.println("Play again? (Please type in yes or no)");
-				strplay = con.readLine();
+			intscore = intscore + gameplay.gameplay(con, strword);
+			con.println("Play again? (Please type in yes or no)");
+			strplay = con.readLine();
 		}
 		
 		if(strplay.equalsIgnoreCase("no")){
 			TextOutputFile leaderboard = new TextOutputFile("leaderboard.txt",true);
-			leaderboard.println(strname+" | Score: "+intscore);
+			leaderboard.println(strname);
+			leaderboard.println(intscore);
 			con.println("Thank you for playing!"); 
 		}
 		con.sleep(2000);
@@ -140,13 +149,51 @@ public class clickplay{
 	}
 	public static Console leaderboard(Console con){
 		
-		String player;
 		String strreturn = "0";
+		String player[][];
+		String strline;
+		String tempplay;
+		String tempscore;
+		int numofplayers=0;
+		int intcount=0;
+		int intcount2;
+		System.out.println("Test");
+		
+		con.setBackgroundColor(new Color(237,164,178));
+		TextInputFile board2 = new TextInputFile("leaderboard.txt");
+		while(board2.eof()==false){
+			strline = board2.readLine();
+			numofplayers++;
+		}
+		System.out.println(numofplayers);
+		board2.close();
+		
+		player = new String[numofplayers/2][2];
 		TextInputFile board = new TextInputFile("leaderboard.txt");
 		while(board.eof()==false){
-			player = board.readLine();
-			con.println(player);	
+			player[intcount][0] = board.readLine();
+			player[intcount][1] = board.readLine();
+			System.out.println(player[intcount][0]+" "+player[intcount][1]);
+			intcount = intcount +1;	
 		}
+
+		for(intcount2 = 0; intcount2 <(numofplayers/2)-1; intcount2++){
+			for(intcount = 0; intcount<(numofplayers/2)-1; intcount++){
+				if(Integer.parseInt(player[intcount+1][1])>Integer.parseInt(player[intcount][1])){
+					tempplay = player[intcount][0];
+					player[intcount][0] = player[intcount+1][0];
+					player[intcount+1][0] = tempplay;
+					
+					tempscore = player[intcount][1];
+					player[intcount][1] = player[intcount+1][1];
+					player[intcount+1][1] = tempscore;
+				}
+			}
+		}
+		for(intcount = 0; intcount<(numofplayers/2); intcount++){
+			con.println(player[intcount][0]+" "+player[intcount][1]);
+		}
+		
 		while(!strreturn.equals("1")){
 			con.println("Return to main screen? (Enter 1)");
 			strreturn = con.readLine();

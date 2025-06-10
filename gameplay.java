@@ -7,7 +7,7 @@ import java.awt.Font;
 
 public class gameplay{
 	public static int gameplay(Console con, String strword[][]){
-		
+		con.setBackgroundColor(new Color(237,164,178));
 		con.println("");
 		int intcount;
 		int score;
