@@ -12,7 +12,7 @@ public class startingscreen{
 		
 		String strname;
 		int intoption=0;
-		boolean blnrepeat;
+		boolean blnrepeat=true;
 		int x=0;
 		int y=0;
 		int z=0;
@@ -47,29 +47,26 @@ public class startingscreen{
 		con.setTextColor(new Color(96,64,130));
 		con.println("Please enter your name:");
 		strname = con.readLine();
-		while(blnrepeat = true){
-			con.clear();
+		
+		con.clear();
+		con.setDrawColor(new Color(237,164,178));
+		con.fillRect(640,130, 900,430);
+		con.println("Hi, "+strname+"! Welcome to Hangman");
+		int intpress;
+		con.setDrawColor(new Color(245, 233, 247));
+		con.fillRoundRect(30,40,440,100,20,20);
+		con.fillRoundRect(490,40,440,100,20,20);
+		con.repaint();
+		while(blnrepeat=true){
 			press = con.currentMouseButton();
 			mousex = con.currentMouseX();
 			mousey = con.currentMouseY();
-			con.setDrawColor(new Color(237,164,178));
-			con.fillRect(640,130, 900,430);
-			con.println("Hi, "+strname+"! Welcome to Hangman");
-			int intpress;
-			con.setDrawColor(new Color(245, 233, 247));
-			con.fillRoundRect(30,40,440,100,20,20);
-			con.fillRoundRect(490,40,440,100,20,20);
 			if(press==1 && mousex>30 && mousex<470 && mousey>40 &&mousey<140){
-				intoption = 1;
-			}else if(press==1 && mousex>490 && mousex<930 && mousey>40 &&mousey<140){
-				intoption = 2;
-			}
-
-			if(intoption == 1){
 				clickplay.clickplay(con, strname);
-			}else if(intoption == 2){
+			}else if(press==1 && mousex>490 && mousex<930 && mousey>40 &&mousey<140){
 				clickplay.leaderboard(con);
 			}
 		}
+		
 	}
 }

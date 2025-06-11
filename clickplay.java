@@ -56,6 +56,7 @@ public class clickplay{
 		con.drawString("CRK",830,245);
 		
 		con.repaint();
+		con.sleep(1000);
 		while(strSelectedTheme.equals("")){
 			intpress = con.currentMouseButton();
 			mousex = con.currentMouseX();
@@ -142,13 +143,14 @@ public class clickplay{
 			leaderboard.println(strname);
 			leaderboard.println(intscore);
 			con.println("Thank you for playing!"); 
+			return con;
 		}
 		con.sleep(2000);
 		return con;
 		
 	}
+
 	public static Console leaderboard(Console con){
-		
 		String strreturn = "0";
 		String player[][];
 		String strline;
@@ -168,7 +170,7 @@ public class clickplay{
 		System.out.println(numofplayers);
 		board2.close();
 		
-		player = new String[numofplayers/2][2];
+		player = new String[(numofplayers/2)][2];
 		TextInputFile board = new TextInputFile("leaderboard.txt");
 		while(board.eof()==false){
 			player[intcount][0] = board.readLine();
@@ -191,7 +193,7 @@ public class clickplay{
 			}
 		}
 		for(intcount = 0; intcount<(numofplayers/2); intcount++){
-			con.println(player[intcount][0]+" "+player[intcount][1]);
+			con.println(player[intcount][0]+": "+player[intcount][1]);
 		}
 		
 		while(!strreturn.equals("1")){
@@ -203,6 +205,64 @@ public class clickplay{
 		}
 		return con;
 	}
+
+
+		con.setBackgroundColor(new Color(237,164,178));
+		String strnewTheme;
+		String strThemes[][];
+		int keepadding = 1;
+		int wordnum;
+		int intcount;
+		int mousex;
+		int mousey;
+		int press;
+		
+		while(keepadding== 1){
+		//	con.setBackgroundColor(new Color(237,164,178));
+			press = con.currentMouseButton();
+			mousex = con.currentMouseX();
+			mousey = con.currentMouseY();
+			con.println("Please enter the new theme you wish to create: ");
+			strnewTheme = con.readLine();
+			TextOutputFile customtheme = new TextOutputFile("customThemes.txt",true);
+			customtheme.println(strnewTheme);
+			TextOutputFile wordbank = new TextOutputFile(strnewTheme+".txt",true);
+			
+			con.println("How many words do you want to put into this theme?");
+			wordnum = con.readInt();
+			strThemes = new String[wordnum][1];
+			
+			for(intcount =0; intcount<wordnum;intcount++){
+				con.println("Enter a word matching the theme ("+(intcount+1)+"): ");
+				strThemes[intcount][0] = con.readLine();
+				wordbank.println(strThemes[intcount][0]);
+			}
+			
+			con.clear();
+			con.println("Add another theme? Yes(1), No(2)");
+			keepadding = con.readInt();
+
+		}
+		if(keepadding==2){
+			System.out.println("STOP ADDING");
+		}
+	}
+	public static String ChooseCustom(Console con){
+		String stroptions;
+		String selectedtheme;
+		con.println("These are the custom themes available: ");
+		TextInputFile customt = new TextInputFile("customThemes.txt");
+		while(customt.eof()= false){
+			stroptions = customt.readLine();
+			con.println(stroptions);
+		}
+		customt.close();
+		con.println("Please enter the theme you wish to play, spelt exactly");
+		selectedtheme = con.readLine();
+		return selectedtheme;
+	}
+
+
 	
 
 }

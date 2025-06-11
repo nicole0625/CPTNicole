@@ -5,5 +5,12 @@ Player B
 Player C
 5
 Player D
-2Nicole
+1
+Nicole
+1
+Nicole
+1
+Nicole
+2
+Nicole
 1
