@@ -7,71 +7,93 @@ import java.awt.Font;
 
 public class clickplay{
 	public static Console clickplay(Console con, String strname){
-		con.setBackgroundColor(new Color(237,164,178));
-		
 		int intscore;
 		String strSelectedTheme="";
-		boolean plyagain;
-		
-		con.setTextColor(new Color(96,64,130));
-		strSelectedTheme = "";
-		/*if(!strSelectedTheme.equalsIgnoreCase("foods") || !strSelectedTheme.equalsIgnoreCase("musicals") || !strSelectedTheme.equalsIgnoreCase("books") || !strSelectedTheme.equalsIgnoreCase("flowers") || !strSelectedTheme.equalsIgnoreCase("CRK")){
-			con.clear();
-			con.println("Type in the theme you wish to play:");
-			con.println("Foods   ||   Musicals   ||   Books   ||   Flowers   ||   CRK");
-			strSelectedTheme = con.readLine();
-		}*/
-		
-		con.println("Choose a theme!");
-		int mousex;
-		int mousey;
+		boolean blnrepeat = true;
+		int intmousex;
+		int intmousey;
 		int intpress;
-		con.setDrawColor(new Color(245, 233, 247));
-		//buttons
-		con.fillRoundRect(20,80,176,200,15,15);
-		con.fillRoundRect(206,80,176,200,15,15);
-		con.fillRoundRect(392,80,176,200,15,15);
-		con.fillRoundRect(578,80,176,200,15,15);
-		con.fillRoundRect(764,80,176,200,15,15);
-		con.setDrawColor(new Color(131, 96, 166));
-		//icons
-		BufferedImage foodicon = con.loadImage("iconfood.png");
-		con.drawImage(foodicon, 30,90);
-		con.drawString("Foods",75,245);
 		
-		BufferedImage musicalicon = con.loadImage("iconmusical.png");
-		con.drawImage(musicalicon, 216,90);
-		con.drawString("Musicals",245,245);
-		
-		BufferedImage bookicon = con.loadImage("iconbook.png");
-		con.drawImage(bookicon, 402,90);
-		con.drawString("Books",448,245);
-		
-		BufferedImage flowericon = con.loadImage("iconflower.png");
-		con.drawImage(flowericon, 588,90);
-		con.drawString("Flowers",625,245);
-		
-		BufferedImage crkicon = con.loadImage("iconcrk.png");
-		con.drawImage(crkicon, 774,90);
-		con.drawString("CRK",830,245);
-		
-		con.repaint();
-		con.sleep(1000);
-		while(strSelectedTheme.equals("")){
-			intpress = con.currentMouseButton();
-			mousex = con.currentMouseX();
-			mousey = con.currentMouseY();
-			if(intpress==1 &&  mousey>90 && mousey<249 && mousex>30 && mousex<189){
-				strSelectedTheme = "foods";
-			}else if(intpress==1 &&  mousey>90 && mousey<249 && mousex>216 && mousex<375){
-				strSelectedTheme = "musicals";
-			}else if(intpress==1 &&  mousey>90 && mousey<249 && mousex>402 && mousex<561){
-				strSelectedTheme = "books";
-			}else if(intpress==1 &&  mousey>90 && mousey<249 && mousex>588 && mousex<747){
-				strSelectedTheme = "flowers";
-			}else if(intpress==1 &&  mousey>90 && mousey<249 && mousex>774 && mousex<933){
-				strSelectedTheme = "CRK";
+		con.setBackgroundColor(new Color(237,164,178));
+		con.setTextColor(new Color(96,64,130));
+
+	
+		while(blnrepeat ==true){
+			con.setDrawColor(new Color(245, 233, 247));
+			con.drawString("Choose a theme!",380,28);
+			//drawing buttons
+			con.fillRoundRect(20,80,176,200,15,15); //food
+			con.fillRoundRect(206,80,176,200,15,15); //musicals
+			con.fillRoundRect(392,80,176,200,15,15); //books
+			con.fillRoundRect(578,80,176,200,15,15); //flowers
+			con.fillRoundRect(764,80,176,200,15,15); //crk
+			con.fillRoundRect(20,290,455,100,15,15); //add custom
+			con.fillRoundRect(485,290,455,100,15,15); //choose custom
+			
+			con.setDrawColor(new Color(131, 96, 166));
+			//icons & text
+			con.drawString("Add Custom Theme",145,320);
+			con.drawString("Select Custom Theme",590,320);
+			
+			BufferedImage foodicon = con.loadImage("iconfood.png");
+			con.drawImage(foodicon, 30,90);
+			con.drawString("Foods",75,245);
+			
+			BufferedImage musicalicon = con.loadImage("iconmusical.png");
+			con.drawImage(musicalicon, 216,90);
+			con.drawString("Musicals",245,245);
+			
+			BufferedImage bookicon = con.loadImage("iconbook.png");
+			con.drawImage(bookicon, 402,90);
+			con.drawString("Books",448,245);
+			
+			BufferedImage flowericon = con.loadImage("iconflower.png");
+			con.drawImage(flowericon, 588,90);
+			con.drawString("Flowers",625,245);
+			
+			BufferedImage crkicon = con.loadImage("iconcrk.png");
+			con.drawImage(crkicon, 774,90);
+			con.drawString("CRK",830,245);
+			
+			con.setDrawColor(new Color(245, 233, 247));
+			con.fillRoundRect(730,430,200,70,15,15);
+			con.setDrawColor(new Color(131, 96, 166));
+			con.drawString("RETURN HOME",760,445);
+			
+			con.repaint();
+			
+			//loop to track mouse for buttons
+			while(strSelectedTheme.equals("")){
+				intpress = con.currentMouseButton();
+				intmousex = con.currentMouseX();
+				intmousey = con.currentMouseY();
+				if(intpress==1 &&  intmousey>90 && intmousey<249 && intmousex>30 && intmousex<189){
+					strSelectedTheme = "foods";
+					blnrepeat =false;
+				}else if(intpress==1 &&  intmousey>90 && intmousey<249 && intmousex>216 && intmousex<375){
+					strSelectedTheme = "musicals";
+					blnrepeat =false;
+				}else if(intpress==1 &&  intmousey>90 && intmousey<249 && intmousex>402 && intmousex<561){
+					strSelectedTheme = "books";
+					blnrepeat =false;
+				}else if(intpress==1 &&  intmousey>90 && intmousey<249 && intmousex>588 && intmousex<747){
+					strSelectedTheme = "flowers";
+					blnrepeat =false;
+				}else if(intpress==1 &&  intmousey>90 && intmousey<249 && intmousex>774 && intmousex<933){
+					strSelectedTheme = "CRK";
+					blnrepeat =false;
+				}else if(intpress==1 &&  intmousey>290 && intmousey<390 && intmousex>20 && intmousex<475){
+					Entercustom(con);
+				}else if(intpress==1 &&  intmousey>290 && intmousey<390 && intmousex>485 && intmousex<940){
+					strSelectedTheme = ChooseCustom(con);
+					blnrepeat =false;
+				}
+				if(intpress==1 && intmousex>730 && intmousex<930 && intmousey>430 &&intmousey<500){
+					con.setBackgroundColor(new Color(237,164,178));
+					return con;
+				}
 			}
+			
 		}
 		
 		intscore= 0;
@@ -123,17 +145,18 @@ public class clickplay{
 						strword[intcount+1][0] = strtempword;
 						
 						
-					}else{
-						
 					}
 				}
 			}
 			
+			//Checking to make sure words are sorted properly
 			for(intcount = 0; intcount<=intthemenum; intcount++){
 				System.out.println(strword[intcount][0]+" "+strword[intcount][1]);
 			}
 			
+			//starting gameplay 
 			intscore = intscore + gameplay.gameplay(con, strword);
+			//ask to play again
 			con.println("Play again? (Please type in yes or no)");
 			strplay = con.readLine();
 		}
@@ -143,15 +166,17 @@ public class clickplay{
 			leaderboard.println(strname);
 			leaderboard.println(intscore);
 			con.println("Thank you for playing!"); 
+			con.sleep(2000);
+			con.setBackgroundColor(new Color(237,164,178));
 			return con;
 		}
-		con.sleep(2000);
+
 		return con;
 		
 	}
 
 	public static Console leaderboard(Console con){
-		String strreturn = "0";
+		boolean constant = true;
 		String player[][];
 		String strline;
 		String tempplay;
@@ -160,8 +185,9 @@ public class clickplay{
 		int intcount=0;
 		int intcount2;
 		System.out.println("Test");
-		
 		con.setBackgroundColor(new Color(237,164,178));
+		
+		//opening leaderboard file and checking how many players
 		TextInputFile board2 = new TextInputFile("leaderboard.txt");
 		while(board2.eof()==false){
 			strline = board2.readLine();
@@ -170,12 +196,15 @@ public class clickplay{
 		System.out.println(numofplayers);
 		board2.close();
 		
+		//opening it again to give value to the player array
 		player = new String[(numofplayers/2)][2];
 		TextInputFile board = new TextInputFile("leaderboard.txt");
 		while(board.eof()==false){
 			player[intcount][0] = board.readLine();
 			player[intcount][1] = board.readLine();
-			System.out.println(player[intcount][0]+" "+player[intcount][1]);
+			System.out.println(player[intcount][0]);
+			System.out.println(player[intcount][1]);
+			//System.out.println(player[intcount][0]+" || "+player[intcount][1]);
 			intcount = intcount +1;	
 		}
 
@@ -195,64 +224,74 @@ public class clickplay{
 		for(intcount = 0; intcount<(numofplayers/2); intcount++){
 			con.println(player[intcount][0]+": "+player[intcount][1]);
 		}
+		con.setDrawColor(new Color(245, 233, 247));
+		con.fillRoundRect(730,430,200,70,15,15);
+		con.setDrawColor(new Color(131, 96, 166));
+		con.drawString("RETURN HOME",760,445);
+		while(constant = true){
+			int press = con.currentMouseButton();
+			int intmousex = con.currentMouseX();
+			int intmousey = con.currentMouseY();
+			if(press==1 && intmousex>730 && intmousex<930 && intmousey>430 &&intmousey<500){
+				con.setBackgroundColor(new Color(237,164,178));
+				return con;
+			}
+		}
 		
-		while(!strreturn.equals("1")){
-			con.println("Return to main screen? (Enter 1)");
-			strreturn = con.readLine();
-		}
-		if(strreturn.equals("1")){
-			return con;
-		}
 		return con;
 	}
 
-
+	public static Console Entercustom(Console con){
 		con.setBackgroundColor(new Color(237,164,178));
 		String strnewTheme;
 		String strThemes[][];
 		int keepadding = 1;
 		int wordnum;
 		int intcount;
-		int mousex;
-		int mousey;
-		int press;
-		
-		while(keepadding== 1){
-		//	con.setBackgroundColor(new Color(237,164,178));
-			press = con.currentMouseButton();
-			mousex = con.currentMouseX();
-			mousey = con.currentMouseY();
-			con.println("Please enter the new theme you wish to create: ");
-			strnewTheme = con.readLine();
-			TextOutputFile customtheme = new TextOutputFile("customThemes.txt",true);
-			customtheme.println(strnewTheme);
-			TextOutputFile wordbank = new TextOutputFile(strnewTheme+".txt",true);
-			
-			con.println("How many words do you want to put into this theme?");
-			wordnum = con.readInt();
-			strThemes = new String[wordnum][1];
-			
-			for(intcount =0; intcount<wordnum;intcount++){
-				con.println("Enter a word matching the theme ("+(intcount+1)+"): ");
-				strThemes[intcount][0] = con.readLine();
-				wordbank.println(strThemes[intcount][0]);
-			}
-			
-			con.clear();
-			con.println("Add another theme? Yes(1), No(2)");
-			keepadding = con.readInt();
+		boolean constant = true;
 
+		con.setBackgroundColor(new Color(237,164,178));
+		con.println("Please enter the new theme you wish to create: ");
+		strnewTheme = con.readLine();
+		TextOutputFile customtheme = new TextOutputFile("customThemes.txt",true);
+		customtheme.println(strnewTheme);
+		TextOutputFile wordbank = new TextOutputFile(strnewTheme+".txt",true);
+		
+		con.println("How many words do you want to put into this theme?");
+		wordnum = con.readInt();
+		strThemes = new String[wordnum][1];
+		
+		for(intcount =0; intcount<wordnum;intcount++){
+			con.println("Enter a word matching the theme ("+(intcount+1)+"): ");
+			strThemes[intcount][0] = con.readLine();
+			wordbank.println(strThemes[intcount][0]);
 		}
-		if(keepadding==2){
-			System.out.println("STOP ADDING");
+		con.println("Added theme... "+strnewTheme);
+		con.setDrawColor(new Color(245, 233, 247));
+		con.fillRoundRect(730,430,200,70,15,15);
+		con.setDrawColor(new Color(131, 96, 166));
+		con.drawString("RETURN HOME",750,450);
+		while(constant = true){
+			int press = con.currentMouseButton();
+			int intmousex = con.currentMouseX();
+			int intmousey = con.currentMouseY();
+			if(press==1 && intmousex>730 && intmousex<930 && intmousey>430 &&intmousey<500){
+				System.out.println("button pressed");
+				con.clear();
+				con.setBackgroundColor(new Color(237,164,178));
+				return con;
+			}
 		}
+
+		return con;
 	}
 	public static String ChooseCustom(Console con){
 		String stroptions;
 		String selectedtheme;
+		con.setBackgroundColor(new Color(237,164,178));
 		con.println("These are the custom themes available: ");
 		TextInputFile customt = new TextInputFile("customThemes.txt");
-		while(customt.eof()= false){
+		while(customt.eof()== false){
 			stroptions = customt.readLine();
 			con.println(stroptions);
 		}
@@ -261,8 +300,6 @@ public class clickplay{
 		selectedtheme = con.readLine();
 		return selectedtheme;
 	}
-
-
-	
-
 }
+
+
